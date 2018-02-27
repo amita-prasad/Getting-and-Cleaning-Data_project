@@ -50,6 +50,9 @@ names(extractedData)<-gsub("-freq()", "Frequency", names(extractedData), ignore.
 names(extractedData)<-gsub("angle", "Angle", names(extractedData))
 names(extractedData)<-gsub("gravity", "Gravity", names(extractedData))
 names(extractedData)
-# From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subjectextractedData$Subject <- as.factor(extractedData$Subject)
+# From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+extractedData$Subject <- as.factor(extractedData$Subject)
 extractedData <- data.table(extractedData)
-tidyData <- aggregate(. ~Subject + Activity, extractedData, mean)tidyData <- tidyData[order(tidyData$Subject,tidyData$Activity),]write.table(tidyData, file = "Tidy.txt", row.names = FALSE)
+tidyData <- aggregate(. ~Subject + Activity, extractedData, mean)
+tidyData <- tidyData[order(tidyData$Subject,tidyData$Activity),]
+write.table(tidyData, file = "Tidy.txt", row.names = FALSE)
